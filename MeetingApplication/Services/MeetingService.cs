@@ -40,7 +40,10 @@ namespace MeetingApplication.Services
 
             List<MeetingJson> meetings = _jsonService.ReadMeetingsFromFile();
 
-            if (meetings.Where(x => x.Meeting!.Id.Equals(id)).Select(x => x.Meeting!.ResponsiblePerson).FirstOrDefault() == user) //buuuuuug
+            if (meetings == null)
+                return response;
+
+            if (meetings.Where(x => x.Meeting!.Id.Equals(id)).Select(x => x.Meeting!.ResponsiblePerson).FirstOrDefault() == user)
             {
                 foreach (MeetingJson meeting in meetings)
                 {
@@ -79,6 +82,9 @@ namespace MeetingApplication.Services
             List<MeetingJson> meetings = _jsonService.ReadMeetingsFromFile();
             var isAdded = false;
 
+            if (meetings == null)
+                return isAdded;
+
             MeetingJson? meeting = meetings.Where(x => x.Meeting!.Id == meetingId).Select(x => x).FirstOrDefault();
 
             if (!meeting!.Meeting!.Attendees!.Contains(person))
@@ -106,6 +112,9 @@ namespace MeetingApplication.Services
 
             List<MeetingJson> meetings = _jsonService.ReadMeetingsFromFile();
             var isDeleted = false;
+
+            if (meetings == null)
+                return isDeleted;
 
             MeetingJson? meeting = meetings.Where(x => x.Meeting!.Id == meetingId).Select(x => x).FirstOrDefault();
 
