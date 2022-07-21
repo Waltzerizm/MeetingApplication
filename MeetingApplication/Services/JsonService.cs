@@ -56,10 +56,14 @@ namespace MeetingApplication.Services
         /// <returns></returns>
         public List<MeetingJson> ReadMeetingsFromFile()
         {
-            string jsonString = File.ReadAllText(FileName);
-            List<MeetingJson>? meetings = JsonConvert.DeserializeObject<List<MeetingJson>>(jsonString);
+            if(File.Exists(FileName))
+            {
+                string jsonString = File.ReadAllText(FileName);
+                List<MeetingJson>? meetings = JsonConvert.DeserializeObject<List<MeetingJson>>(jsonString);
+                return meetings!;
+            }
 
-            return meetings!;
+            return null;
         }
 
         /// <summary>

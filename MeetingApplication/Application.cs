@@ -220,7 +220,7 @@ namespace MeetingApplication
                 else if (userInput!.ToString() == "5") // FILTER
                 {
                     string keyword;
-                    List<MeetingJson> meetings;
+                    List<MeetingJson>? meetings;
 
                     Console.WriteLine("Filter options:");
                     Console.WriteLine("    'enter' - List all meethings without filtering");
@@ -389,9 +389,9 @@ namespace MeetingApplication
                             break;
                     }
 
-                    if (meetings.Count != 0)
+                    if (meetings != null && meetings?.Count() != 0)
                     {
-                        foreach (MeetingJson meeting in meetings)
+                        foreach (MeetingJson meeting in meetings!)
                         {
                             Console.WriteLine(meeting.Meeting?.ToString());
                         }

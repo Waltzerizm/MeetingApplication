@@ -129,9 +129,12 @@ namespace MeetingApplication.Services
         /// <param name="filter"></param>
         /// <param name="filterKeyword"></param>
         /// <returns></returns>
-        public List<MeetingJson> ListMeetings(string? filter = null, string? filterKeyword = null)
+        public List<MeetingJson>? ListMeetings(string? filter = null, string? filterKeyword = null)
         {
             List<MeetingJson> list = _jsonService.ReadMeetingsFromFile();
+
+            if (list == null)
+                return null;
 
             switch (filter)
             {
@@ -150,9 +153,12 @@ namespace MeetingApplication.Services
         /// <param name="filter"></param>
         /// <param name="filterKeyword"></param>
         /// <returns></returns>
-        public List<MeetingJson> ListMeetings(string? filter = null, Meeting.Categories? filterKeyword = null)
+        public List<MeetingJson>? ListMeetings(string? filter = null, Meeting.Categories? filterKeyword = null)
         {
             List<MeetingJson> list = _jsonService.ReadMeetingsFromFile();
+
+            if (list == null)
+                return null;
 
             if (filter == "category")
                 return list.Where(x => x.Meeting!.Category!.Equals(filterKeyword)).Select(x => x).ToList();
@@ -166,9 +172,12 @@ namespace MeetingApplication.Services
         /// <param name="filter"></param>
         /// <param name="filterKeyword"></param>
         /// <returns></returns>
-        public List<MeetingJson> ListMeetings(string? filter = null, Meeting.Types? filterKeyword = null)
+        public List<MeetingJson>? ListMeetings(string? filter = null, Meeting.Types? filterKeyword = null)
         {
             List<MeetingJson> list = _jsonService.ReadMeetingsFromFile();
+
+            if (list == null)
+                return null;
 
             if (filter == "type")
                 return list.Where(x => x.Meeting!.Type!.Equals(filterKeyword)).Select(x => x).ToList();
@@ -182,9 +191,12 @@ namespace MeetingApplication.Services
         /// <param name="filter"></param>
         /// <param name="filterKeyword"></param>
         /// <returns></returns>
-        public List<MeetingJson> ListMeetings(string? filter = null, DateTime? filterKeyword = null)
+        public List<MeetingJson>? ListMeetings(string? filter = null, DateTime? filterKeyword = null)
         {
             List<MeetingJson> list = _jsonService.ReadMeetingsFromFile();
+
+            if (list == null)
+                return null;
 
             if (filter == "dateFrom")
                 return list.Where(x => x.Meeting!.StartDate >= filterKeyword).Select(x => x).ToList();
@@ -198,9 +210,12 @@ namespace MeetingApplication.Services
         /// <param name="filter"></param>
         /// <param name="filterKeyword"></param>
         /// <returns></returns>
-        public List<MeetingJson> ListMeetings(string? filter = null, List<DateTime>? filterKeyword = null)
+        public List<MeetingJson>? ListMeetings(string? filter = null, List<DateTime>? filterKeyword = null)
         {
             List<MeetingJson> list = _jsonService.ReadMeetingsFromFile();
+
+            if (list == null)
+                return null;
 
             if (filter == "dateBetween")
                 return list.Where(x => (x.Meeting!.StartDate >= filterKeyword![0]) && (x.Meeting.EndDate <= filterKeyword[1].AddHours(23).AddMinutes(59).AddSeconds(59))).Select(x => x).ToList();
@@ -214,9 +229,12 @@ namespace MeetingApplication.Services
         /// <param name="filter"></param>
         /// <param name="filterKeyword"></param>
         /// <returns></returns>
-        public List<MeetingJson> ListMeetings(string? filter = null, int? filterKeyword = null)
+        public List<MeetingJson>? ListMeetings(string? filter = null, int? filterKeyword = null)
         {
             List<MeetingJson> list = _jsonService.ReadMeetingsFromFile();
+
+            if (list == null)
+                return null;
 
             if (filter == "attendees")
                 return list.Where(x => x.Meeting!.Attendees!.Count() >= filterKeyword).Select(x => x).ToList();
